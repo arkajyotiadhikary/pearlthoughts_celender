@@ -12,6 +12,7 @@ describe('DatePickerComponent', () => {
   const mockUseDatePickerStore = useDatePickerStore as jest.MockedFunction<typeof useDatePickerStore>;
 
   beforeEach(() => {
+    // Mock return values for the store hook
     mockUseDatePickerStore.mockReturnValue({
       startDate: new Date('2023-01-01'),
       endDate: new Date('2023-01-31'),
@@ -30,7 +31,7 @@ describe('DatePickerComponent', () => {
     render(<DatePickerComponent />);
     
     expect(screen.getByText('Date Picker Dashboard')).toBeInTheDocument();
-    expect(screen.getByText('Calendar')).toBeInTheDocument();
+    expect(screen.getByText('Select Date Range')).toBeInTheDocument();
     expect(screen.getByText('Recurrence Settings')).toBeInTheDocument();
     expect(screen.getByText('Recurring Dates Preview')).toBeInTheDocument();
   });

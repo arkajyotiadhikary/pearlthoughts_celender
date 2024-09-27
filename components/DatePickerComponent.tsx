@@ -30,7 +30,7 @@ const DatePickerComponent: React.FC = () => {
       }, [memoizedGenerateDates]);
 
       return (
-            <div className="p-6 space-y-6 max-w-4xl mx-auto bg-gray-50 rounded-lg shadow-lg">
+            <div className="p-6 space-y-6 max-w-4xl mx-auto ">
                   <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
                         Date Picker Dashboard
                   </h1>

@@ -1,15 +1,7 @@
-const path = require('path');
-
 module.exports = {
-  testEnvironment: 'jsdom',
-  transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
-  },
-  moduleNameMapper: {
-    '^@/(.*)$': path.resolve(__dirname, './'),
-    '^@/components/(.*)$': path.resolve(__dirname, 'components/$1'),
-    '^@/lib/(.*)$': path.resolve(__dirname, 'lib/$1'),
-    '^@/pages/(.*)$': path.resolve(__dirname, 'pages/$1'),
-  },
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+      setupFilesAfterEnv: ["<rootDir>/jest.setup.js"], // Your Jest setup file
+      transform: {
+            "^.+\\.(js|jsx|ts|tsx)$": "babel-jest", // Use babel-jest for transforming JS/TS files
+      },
+      testEnvironment: "jsdom", // For testing React components in a DOM-like environment
 };

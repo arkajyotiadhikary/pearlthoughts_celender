@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { addDays, addWeeks, addMonths, addYears } from "date-fns";
+import { addDays, addWeeks, addMonths, addYears, isBefore } from "date-fns";
 
 type RecurrenceType = "daily" | "weekly" | "monthly" | "yearly";
 
@@ -18,13 +18,15 @@ interface DatePickerState {
 
 const generateRecurringDates = (
       startDate: Date,
+      endDate: Date | null,
       recurrenceType: RecurrenceType,
       interval: number
 ): Date[] => {
       const dates: Date[] = [];
       let currentDate = startDate;
 
-      for (let i = 0; i < 12; i++) {
+      // Continue generating dates until endDate is reached (if endDate exists)
+      while (endDate && isBefore(currentDate, endDate)) {
             switch (recurrenceType) {
                   case "daily":
                         currentDate = addDays(currentDate, interval);
@@ -39,7 +41,9 @@ const generateRecurringDates = (
                         currentDate = addYears(currentDate, interval);
                         break;
             }
-            dates.push(currentDate);
+            if (endDate && isBefore(currentDate, endDate)) {
+                  dates.push(currentDate);
+            }
       }
 
       return dates;
@@ -59,6 +63,7 @@ export const useDatePickerStore = create<DatePickerState>((set) => ({
             set((state) => ({
                   recurringDates: generateRecurringDates(
                         state.startDate,
+                        state.endDate,
                         state.recurrenceType,
                         state.interval
                   ),
